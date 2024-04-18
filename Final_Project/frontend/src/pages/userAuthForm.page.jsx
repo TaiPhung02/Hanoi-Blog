@@ -7,6 +7,7 @@ import AnimationWrapper from "../common/page-animation";
 import { Toaster, toast } from "react-hot-toast";
 import { storeInSession } from "../common/session";
 import { UserContext } from "../App";
+import { authWithGoogle } from "../common/firebase";
 
 const UserAuthForm = ({ type }) => {
     const authForm = useRef();
@@ -15,8 +16,6 @@ const UserAuthForm = ({ type }) => {
         userAuth: { access_token },
         setUserAuth,
     } = useContext(UserContext);
-
-    console.log(access_token);
 
     const userAuthThroughServer = (serverRoute, formData) => {
         axios
@@ -69,6 +68,25 @@ const UserAuthForm = ({ type }) => {
         }
 
         userAuthThroughServer(serverRoute, formData);
+    };
+
+    const handleGoogleAuth = async (e) => {
+        e.preventDefault();
+
+        authWithGoogle()
+            .then((user) => {
+                let serverRoute = "/google-auth";
+
+                let formData = {
+                    access_token: user.accessToken,
+                };
+
+                userAuthThroughServer(serverRoute, formData);
+            })
+            .catch((error) => {
+                toast.error("Trouble login through google");
+                return console.log(error);
+            });
     };
 
     return access_token ? (
@@ -125,13 +143,16 @@ const UserAuthForm = ({ type }) => {
                         <hr className="w-1/2 border-black" />
                     </div>
 
-                    <button className="btn-dark flex items-center justify-center gap-4 w-[90%] center">
+                    <button
+                        className="btn-dark flex items-center justify-center gap-4 w-[90%] center"
+                        onClick={handleGoogleAuth}
+                    >
                         <img
                             src={googleIcon}
                             alt="googleIcon"
                             className="w-5"
                         />
-                        continue with google
+                        Continue with google
                     </button>
 
                     {type == "sign-in" ? (
