@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import admin from "firebase-admin";
-// import serviceAccountKey from "./react-js-hanoi-blog-firebase-adminsdk-cvea0-bf0e86e334.json" assert { type: "json" };
+import serviceAccountKey from "./react-js-hanoi-blog-firebase-adminsdk-cvea0-bf0e86e334.json" assert { type: "json" };
 import { getAuth } from "firebase-admin/auth";
 
 // schema
@@ -132,11 +132,9 @@ server.post("/sign-in", (req, res) => {
                     }
                 );
             } else {
-                return res
-                    .status(403)
-                    .json({
-                        error: "Account was created using google. Try logging in with google.",
-                    });
+                return res.status(403).json({
+                    error: "Account was created using google. Try logging in with google.",
+                });
             }
         })
         .catch((err) => {
