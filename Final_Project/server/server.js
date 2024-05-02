@@ -32,7 +32,7 @@ mongoose.connect(process.env.DB_LOCATION, {
 
 // setting up s3 bucket
 const s3 = new aws.S3({
-    region: "ap-southeast-2",
+    region: "ap-southeast-1",
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
@@ -42,7 +42,7 @@ const generateUploadURL = async () => {
     const imageName = `${nanoid()}-${date.getTime()}.jpeg`;
 
     return await s3.getSignedUrlPromise("putObject", {
-        Bucket: "hanoi-blog",
+        Bucket: "hanoi-blogging-website",
         Key: imageName,
         Expires: 1000,
         ContentType: "image/jpeg",
@@ -78,10 +78,8 @@ const generateUsername = async (email) => {
 // upload image url route
 server.get("/get-upload-url", (req, res) => {
     generateUploadURL()
-        .then((url) => {
-            return res.status(200).json({ uploadURL: url });
-        })
-        .catch((err) => {
+        .then(url => res.status(200).json({ uploadURL: url }))
+        .catch(err => {
             console.log(err.message);
             return res.status(500).json({ error: err.message });
         });
