@@ -3,9 +3,11 @@ import AnimationWrapper from "../common/page-animation";
 import logo from "../imgs/logo.png";
 import defaultBanner from "../imgs/blog_banner.png";
 import { uploadImage } from "../common/aws";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { EditorContext } from "../pages/editor.pages";
+import EditorJS from "@editorjs/editorjs";
+import { tools } from "./tools.component";
 
 const BlogEditor = () => {
   let {
@@ -14,8 +16,15 @@ const BlogEditor = () => {
     setBlog,
   } = useContext(EditorContext);
 
-  console.log(blog);
-
+  // useEffect
+  useEffect(() => {
+    let editor = new EditorJS({
+      holderId: "textEditor",
+      data: "",
+      tools: tools,
+      placeholder: "Start typing your blog here...",
+    });
+  }, []);
   const handleBannerUpload = (e) => {
     let img = e.target.files[0];
 
@@ -100,7 +109,9 @@ const BlogEditor = () => {
               onChange={handleTitleChange}
             ></textarea>
 
-            <hr className="w-full opacity-10 my-10" />
+            <hr className="w-full opacity-10 my-5" />
+
+            <div id="textEditor" className="font-gelasio "></div>
           </div>
         </section>
       </AnimationWrapper>
