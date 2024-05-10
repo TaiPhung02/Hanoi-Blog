@@ -1,1 +1,23 @@
-GET http://localhost:3000/get-upload-url
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2RlODI0YThjY2Q2MzNlMWJkZGY4YSIsImlhdCI6MTcxNTMzMzE1Nn0.CiGox5LV88nBCBEhGPyko7tNY1SUWFetqZLzh-lzSJc
+# POST http://localhost:3000/sign-up
+# Content-Type: application/json
+
+# {
+#   "fullname": "john",
+#   "email": "john2@example.com",
+#   "password": "John@123"
+# }
+
+POST http://localhost:3000/create-blog
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2RlODI0YThjY2Q2MzNlMWJkZGY4YSIsImlhdCI6MTcxNTMzMzE1Nn0.CiGox5LV88nBCBEhGPyko7tNY1SUWFetqZLzh-lzSJc
+
+{
+  "title": "test title @ 3 123 $",
+  "banner": "https://example.com/image-url",
+  "des": "this is a des",
+  "content": {
+    "blocks": [ 1, 2]
+  },
+  "tags": ["tag1", "tag2"]
+}
