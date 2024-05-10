@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimationWrapper from "../common/page-animation";
 import logo from "../imgs/logo.png";
 import defaultBanner from "../imgs/blog_banner.png";
@@ -8,6 +8,8 @@ import { Toaster, toast } from "react-hot-toast";
 import { EditorContext } from "../pages/editor.pages";
 import EditorJS from "@editorjs/editorjs";
 import { tools } from "./tools.component";
+import axios from "axios";
+import { UserContext } from "../App";
 
 const BlogEditor = () => {
   let {
@@ -19,16 +21,24 @@ const BlogEditor = () => {
     setTextEditor,
   } = useContext(EditorContext);
 
+  let {
+    userAuth: { access_token },
+  } = useContext(UserContext);
+
+  let navigate = useNavigate();
+
   // useEffect
   useEffect(() => {
-    setTextEditor(
-      new EditorJS({
-        holderId: "textEditor",
-        data: content,
-        tools: tools,
-        placeholder: "Start typing your blog here...",
-      })
-    );
+    if (!textEditor.isReady) {
+      setTextEditor(
+        new EditorJS({
+          holderId: "textEditor",
+          data: content,
+          tools: tools,
+          placeholder: "Start typing your blog here...",
+        })
+      );
+    }
   }, []);
   const handleBannerUpload = (e) => {
     let img = e.target.files[0];
@@ -70,29 +80,86 @@ const BlogEditor = () => {
   };
 
   const handlePublishEvent = () => {
-    // if (!banner.length) {
-    //   return toast.error("Upload a blog banner to publish it");
-    // }
+    if (!banner.length) {
+      return toast.error("Upload a blog banner to publish it");
+    }
 
-    // if (!title.length) {
-    //   return toast.error("Upload a blog title to publish it");
-    // }
+    if (!title.length) {
+      return toast.error("Upload a blog title to publish it");
+    }
 
-    // if (textEditor.isReady) {
+    if (textEditor.isReady) {
       textEditor
         .save()
         .then((data) => {
-          // if (data.blocks.length) {
+          if (data.blocks.length) {
             setBlog({ ...blog, content: data });
             setEditorState("publish");
-          // } else {
-          //   return toast.error("Write something to publish it");
-          // }
+          } else {
+            return toast.error("Write something to publish it");
+          }
         })
         .catch((error) => {
           console.log(error);
         });
-    // }
+    }
+  };
+
+  const handleSaveDraft = (e) => {
+    if (e.target.className.includes("disable")) {
+      return;
+    }
+
+    if (!title.length) {
+      return toast.error("Write blog title before saving it as a draft");
+    }
+
+    let loadingToast = toast.loading("Saving Draft...");
+
+    e.target.classList.add("disable");
+
+    if (textEditor.isReady) {
+      textEditor
+        .save()
+        .then((content) => {
+          let blogObj = {
+            banner,
+            title,
+            tags,
+            des,
+            content,
+            draft: true,
+          };
+
+          axios
+            .post(
+              import.meta.env.VITE_SERVER_DOMAIN + "/create-blog",
+              blogObj,
+              {
+                headers: { Authorization: `Bearer ${access_token}` },
+              }
+            )
+            .then(() => {
+              e.target.classList.remove("disable");
+
+              toast.dismiss(loadingToast);
+              toast.success("Saved");
+
+              setTimeout(() => {
+                navigate("/");
+              }, 500);
+            })
+            .catch(({ response }) => {
+              e.target.classList.remove("disable");
+              toast.dismiss(loadingToast);
+
+              return toast.error(response.data.error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -110,7 +177,10 @@ const BlogEditor = () => {
           <button className="btn-dark py-2" onClick={handlePublishEvent}>
             Publish
           </button>
-          <button className="btn-light py-2">Save Draft</button>
+
+          <button className="btn-light py-2" onClick={handleSaveDraft}>
+            Save Draft
+          </button>
         </div>
       </nav>
       <Toaster />

@@ -101,7 +101,7 @@ const PublishForm = () => {
       .post(import.meta.env.VITE_SERVER_DOMAIN + "/create-blog", blogObj, {
         headers: { Authorization: `Bearer ${access_token}` },
       })
-      .then(({ data }) => {
+      .then(() => {
         e.target.classList.remove("disable");
 
         toast.dismiss(loadingToast);

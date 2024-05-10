@@ -260,31 +260,33 @@ server.post("/create-blog", verifyJWT, (req, res) => {
   if (!title.length) {
     return res
       .status(403)
-      .json({ error: "You must provide a title to publish the blog" });
+      .json({ error: "You must provide a title for your blog" });
   }
 
-  if (!des.length || des.length > 200) {
-    return res.status(403).json({
-      error: "You must provide a blog description under 200 characters",
-    });
-  }
+  if (!draft) {
+    if (!des.length || des.length > 200) {
+      return res.status(403).json({
+        error: "You must provide a blog description under 200 characters",
+      });
+    }
 
-  if (!banner.length) {
-    return res
-      .status(403)
-      .json({ error: "You must provide a blog banner to publish the blog" });
-  }
+    if (!banner.length) {
+      return res
+        .status(403)
+        .json({ error: "You must provide a blog banner for your blog" });
+    }
 
-  if (!content.blocks.length) {
-    return res.status(403).json({
-      error: "There must be some blog content to publish it",
-    });
-  }
+    if (!content.blocks.length) {
+      return res.status(403).json({
+        error: "There must be some blog content to publish it",
+      });
+    }
 
-  if (!tags.length || tags.length > 10) {
-    return res
-      .status(403)
-      .json({ error: "Provide tags in oder to publish the blog, maximum 10" });
+    if (!tags.length || tags.length > 10) {
+      return res.status(403).json({
+        error: "Provide tags in oder for your blog, maximum 10",
+      });
+    }
   }
 
   tags = tags.map((tag) => tag.toLowerCase());
