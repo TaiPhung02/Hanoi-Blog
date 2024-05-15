@@ -4,6 +4,7 @@ import InPageNavigation from "../components/inpage-navigation.component";
 import { useEffect, useState } from "react";
 import Loader from "../components/loader.component";
 import BlogPostCard from "../components/blog-post.component";
+import MinimalBlogPost from "../components/nobanner-blog-post.component";
 
 const HomePage = () => {
   let [blogs, setBlog] = useState(null);
@@ -58,7 +59,7 @@ const HomePage = () => {
                 trendingBlogs.map((blog, i) => {
                   return (
                     <AnimationWrapper transition={{ duration: 1, delay: i * 0.1 }} key={i}>
-                      <MinimalBlogPost/>
+                      <MinimalBlogPost blog={blog} index={i} />
                     </AnimationWrapper>
                   )
                 }) 
