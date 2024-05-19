@@ -6,6 +6,7 @@ import Loader from "../components/loader.component";
 import BlogPostCard from "../components/blog-post.component";
 import MinimalBlogPost from "../components/nobanner-blog-post.component";
 import { activeTabRef } from "../components/inpage-navigation.component";
+import NoDataMessage from "../components/nodata.component";
 
 const HomePage = () => {
   let [blogs, setBlog] = useState(null);
@@ -98,7 +99,7 @@ const HomePage = () => {
             <>
               {blogs == null ? (
                 <Loader />
-              ) : (
+              ) : blogs.length ? (
                 blogs.map((blog, i) => {
                   return (
                     <AnimationWrapper
@@ -112,13 +113,15 @@ const HomePage = () => {
                     </AnimationWrapper>
                   );
                 })
+              ) : (
+                <NoDataMessage message={"No blogs published!"} />
               )}
             </>
 
             <>
               {trendingBlogs == null ? (
                 <Loader />
-              ) : (
+              ) : trendingBlogs.length ? (
                 trendingBlogs.map((blog, i) => {
                   return (
                     <AnimationWrapper
@@ -129,6 +132,8 @@ const HomePage = () => {
                     </AnimationWrapper>
                   );
                 })
+              ) : (
+                <NoDataMessage message={"No trending blogs!"} />
               )}
             </>
           </InPageNavigation>
@@ -168,7 +173,7 @@ const HomePage = () => {
 
             {trendingBlogs == null ? (
               <Loader />
-            ) : (
+            ) : trendingBlogs.length ? (
               trendingBlogs.map((blog, i) => {
                 return (
                   <AnimationWrapper
@@ -179,6 +184,8 @@ const HomePage = () => {
                   </AnimationWrapper>
                 );
               })
+            ) : (
+              <NoDataMessage message={"No trending blogs!"} />
             )}
           </div>
         </div>
