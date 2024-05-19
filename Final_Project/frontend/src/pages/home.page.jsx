@@ -5,10 +5,7 @@ import { useEffect, useState } from "react";
 import Loader from "../components/loader.component";
 import BlogPostCard from "../components/blog-post.component";
 import MinimalBlogPost from "../components/nobanner-blog-post.component";
-import {
-  activeTabLineRef,
-  activeTabRef,
-} from "../components/inpage-navigation.component";
+import { activeTabRef } from "../components/inpage-navigation.component";
 
 const HomePage = () => {
   let [blogs, setBlog] = useState(null);
@@ -25,11 +22,24 @@ const HomePage = () => {
     "new",
     "best",
     "free",
-    "paid",
+    "hà nội",
   ];
   const fetchLatestBlogs = () => {
     axios
       .get(import.meta.env.VITE_SERVER_DOMAIN + "/latest-blogs")
+      .then(({ data }) => {
+        setBlog(data.blogs);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const fetchBlogsByCategory = () => {
+    axios
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/search-blogs", {
+        tag: pageState,
+      })
       .then(({ data }) => {
         setBlog(data.blogs);
       })
@@ -67,6 +77,8 @@ const HomePage = () => {
 
     if (pageState == "home") {
       fetchLatestBlogs();
+    } else {
+      fetchBlogsByCategory();
     }
 
     if (!trendingBlogs) {
