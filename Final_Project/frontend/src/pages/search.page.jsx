@@ -13,6 +13,7 @@ const SearchPage = () => {
   let { query } = useParams();
 
   let [blogs, setBlog] = useState(null);
+  let [users, setUsers] = useState(null);
 
   const searchBlogs = ({ page = 1, create_new_arr = false }) => {
     axios
@@ -36,13 +37,26 @@ const SearchPage = () => {
       });
   };
 
+  const fetchUsers = () => {
+    axios
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/search-users", { query })
+      .then(({ data: { users } }) => {
+        setUsers(users);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     resetState();
     searchBlogs({ page: 1, create_new_arr: true });
+    fetchUsers();
   }, [query]);
 
   const resetState = () => {
     setBlog(null);
+    setUsers(null);
   };
 
   return (
