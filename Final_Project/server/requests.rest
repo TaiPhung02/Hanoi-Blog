@@ -8,6 +8,13 @@
 #   "password": "John@123"
 # }
 
+# POST http://localhost:3000/get-blog
+# Content-Type: application/json
+
+# {
+#   "blog_id": "Ho-ng-Th-nh-Th-ng-Long-Minh-ch-ng-cho-s-ph-t-tri-n-c-a-n-n-v-n-minh-d-n-t-cpnT1ehpnK0j80SdBp8h5s"
+# }
+
 POST http://localhost:3000/get-profile
 Content-Type: application/json
 
