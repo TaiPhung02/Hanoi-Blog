@@ -1,6 +1,37 @@
 import { useContext } from "react";
 import { BlogContext } from "../pages/blog.page";
 import CommentField from "./comment-field.component";
+import axios from "axios";
+
+export const fetchComments = async ({
+  skip = 0,
+  blog_id,
+  setParentCommentCountFun,
+  comment_array = null,
+}) => {
+  let res;
+
+  await axios
+    .post(import.meta.env.VITE_SERVER_DOMAIN + "/get-blog-comments", {
+      blog_id,
+      skip,
+    })
+    .then(({ data }) => {
+      data.map((comment) => {
+        comment.childrenLevel = 0;
+      });
+
+      setParentCommentCountFun((preVal) => preVal + data.length);
+
+      if (comment_array == null) {
+        res = { results: data };
+      } else {
+        res = { results: [...comment_array, ...data] };
+      }
+    });
+
+  return res;
+};
 
 const CommentsContainer = () => {
   let {
@@ -23,17 +54,17 @@ const CommentsContainer = () => {
           {title}
         </p>
 
-        <button 
-          className="absolute top-0 right-0 flex justify-center items-center w-12 h-12 rounded-full bg-grey" 
-          onClick={() => setCommentsWrapper(preVal => !preVal)}
+        <button
+          className="absolute top-0 right-0 flex justify-center items-center w-12 h-12 rounded-full bg-grey"
+          onClick={() => setCommentsWrapper((preVal) => !preVal)}
         >
           <i className="fi fi-br-cross text-2xl mt-2"></i>
         </button>
       </div>
 
-      <hr className="border-grey my-8 w-[120%] -ml-10"/>
+      <hr className="border-grey my-8 w-[120%] -ml-10" />
 
-      <CommentField action="comment"/>
+      <CommentField action="comment" />
     </div>
   );
 };
