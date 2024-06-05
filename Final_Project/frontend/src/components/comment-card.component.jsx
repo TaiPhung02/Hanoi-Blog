@@ -27,9 +27,9 @@ const CommentCard = ({ index, leftVal, commentData }) => {
 
         <p className="font-gelasio text-xl ml-3">{comment}</p>
 
-        <div>
+        {/* <div>
           
-        </div>
+        </div> */}
       </div>
     </div>
   );
