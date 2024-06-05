@@ -53,8 +53,6 @@ const BlogPage = () => {
           setParentCommentCountFun: setTotalParentCommentsLoaded,
         });
 
-        console.log(blog);
-
         setBlog(blog);
 
         axios
