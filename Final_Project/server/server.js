@@ -607,6 +607,7 @@ server.post("/add-comment", verifyJWT, (req, res) => {
 
   if (replying_to) {
     commentObj.parent = replying_to;
+    commentObj.isReply = true;
   }
 
   new Comment(commentObj).save().then(async (commentFile) => {
@@ -642,8 +643,6 @@ server.post("/add-comment", verifyJWT, (req, res) => {
       ).then((replyingToCommentDoc) => {
         notificationObj.notification_for = replyingToCommentDoc.commented_by;
       });
-
-      
     }
 
     new Notification(notificationObj).save().then((notification) => {
@@ -681,6 +680,35 @@ server.post("/get-blog-comments", (req, res) => {
     .catch((err) => {
       console.log(err.message);
       return res.status(500).json({ error: err.message });
+    });
+});
+
+server.post("/get-replies", (req, res) => {
+  let { _id, skip } = req.body;
+
+  let maxLimit = 5;
+
+  Comment.findOne({ _id })
+    .populate({
+      path: "children",
+      option: {
+        limit: maxLimit,
+        skip: skip,
+        sort: { commentedAt: -1 },
+      },
+      populate: {
+        path: "commented_by",
+        select:
+          "personal_info.profile_img personal_info.fullname personal_info.username",
+      },
+      select: "-blog_id -updatedAt",
+    })
+    .select("children")
+    .then((doc) => {
+      return res.status(200).json({ replies: doc.children });
+    })
+    .catch((err) => {
+      return res.status(500).json({ errors: err.message });
     });
 });
 
