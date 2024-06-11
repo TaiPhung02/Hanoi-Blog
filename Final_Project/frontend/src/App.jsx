@@ -9,55 +9,42 @@ import SearchPage from "./pages/search.page";
 import PageNotFound from "./pages/404.page";
 import ProfilePage from "./pages/profile.page";
 import BlogPage from "./pages/blog.page";
+import SideNav from "./components/sidenavbar.component";
 
 export const UserContext = createContext({});
 
 const App = () => {
-    const [userAuth, setUserAuth] = useState({});
+  const [userAuth, setUserAuth] = useState({});
 
-    useEffect(() => {
-        let userInSession = lookInSession("user");
+  useEffect(() => {
+    let userInSession = lookInSession("user");
 
-        userInSession
-            ? setUserAuth(JSON.parse(userInSession))
-            : setUserAuth({ access_token: null });
-    }, []);
+    userInSession
+      ? setUserAuth(JSON.parse(userInSession))
+      : setUserAuth({ access_token: null });
+  }, []);
 
-    return (
-        <UserContext.Provider value={{ userAuth, setUserAuth }}>
-            <Routes>
-                <Route path="/editor" element={<Editor />} />
-                <Route path="/editor/:blog_id" element={<Editor />} />
-                <Route path="/" element={<Navbar />}>
-                    <Route index element={<HomePage/>} />
-                    <Route
-                        path="sign-in"
-                        element={<UserAuthForm type="sign-in" />}
-                    />
-                    <Route
-                        path="sign-up"
-                        element={<UserAuthForm type="sign-up" />}
-                    />
-                    <Route
-                        path="search/:query"
-                        element={<SearchPage/>}
-                    />
-                    <Route
-                        path="user/:id"
-                        element={<ProfilePage/>}
-                    />
-                    <Route
-                        path="blog/:blog_id"
-                        element={<BlogPage/>}
-                    />
-                    <Route
-                        path="*"
-                        element={<PageNotFound/>}
-                    />
-                </Route>
-            </Routes>
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ userAuth, setUserAuth }}>
+      <Routes>
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/editor/:blog_id" element={<Editor />} />
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<HomePage />} />
+          <Route path="settings" element={<SideNav />}>
+            <Route path="edit-profile" element={<h1>edit profile</h1>} />
+            <Route path="change-password" element={<h1>change profile</h1>} />
+          </Route>
+          <Route path="sign-in" element={<UserAuthForm type="sign-in" />} />
+          <Route path="sign-up" element={<UserAuthForm type="sign-up" />} />
+          <Route path="search/:query" element={<SearchPage />} />
+          <Route path="user/:id" element={<ProfilePage />} />
+          <Route path="blog/:blog_id" element={<BlogPage />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
+      </Routes>
+    </UserContext.Provider>
+  );
 };
 
 export default App;
