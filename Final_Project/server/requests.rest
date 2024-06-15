@@ -1,23 +1,18 @@
-# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2M2RlODI0YThjY2Q2MzNlMWJkZGY4YSIsImlhdCI6MTcxNTMzMzE1Nn0.CiGox5LV88nBCBEhGPyko7tNY1SUWFetqZLzh-lzSJc
-# POST http://localhost:3000/sign-up
+# "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjcxN2E4MmM1NjU1YjUzM2NjZjdlZSIsImlhdCI6MTcxODM3OTA4OX0.n7WT8JV0X28KdNkkh8KIVI-K1LO7qNqW58X5NIOzT90"
+# POST http://localhost:3000/sign-in
 # Content-Type: application/json
 
 # {
-#   "fullname": "john",
-#   "email": "john2@example.com",
-#   "password": "John@123"
+#   "email": "phungkitai1810@gmail.com",
+#   "password": "Taidz@123"
 # }
 
-# POST http://localhost:3000/get-blog
-# Content-Type: application/json
 
-# {
-#   "blog_id": "Ho-ng-Th-nh-Th-ng-Long-Minh-ch-ng-cho-s-ph-t-tri-n-c-a-n-n-v-n-minh-d-n-t-cpnT1ehpnK0j80SdBp8h5s"
-# }
-
-POST http://localhost:3000/get-profile
+POST http://localhost:3000/change-password
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjcxN2E4MmM1NjU1YjUzM2NjZjdlZSIsImlhdCI6MTcxODM3OTA4OX0.n7WT8JV0X28KdNkkh8KIVI-K1LO7qNqW58X5NIOzT90
 
 {
-  "username": "phungkitai1810"
+  "currentPassword": "Taidz@123",
+  "newPassword": "Taidz@1"
 }
