@@ -9,7 +9,7 @@ const SideNav = () => {
 
   let page = location.pathname.split("/")[2];
 
-  let [pageState, setPageState] = useState(page.replace("-", ""));
+  let [pageState, setPageState] = useState(page.replace("-", " "));
   let [showSideNav, setShowsideNav] = useState(false);
 
   let activeTabLine = useRef();

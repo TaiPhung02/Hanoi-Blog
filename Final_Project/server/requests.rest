@@ -1,18 +1,17 @@
 # "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjcxN2E4MmM1NjU1YjUzM2NjZjdlZSIsImlhdCI6MTcxODM3OTA4OX0.n7WT8JV0X28KdNkkh8KIVI-K1LO7qNqW58X5NIOzT90"
-# POST http://localhost:3000/sign-in
-# Content-Type: application/json
-
-# {
-#   "email": "phungkitai1810@gmail.com",
-#   "password": "Taidz@123"
-# }
-
-
-POST http://localhost:3000/change-password
+POST http://localhost:3000/get-profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjcxN2E4MmM1NjU1YjUzM2NjZjdlZSIsImlhdCI6MTcxODM3OTA4OX0.n7WT8JV0X28KdNkkh8KIVI-K1LO7qNqW58X5NIOzT90
 
 {
-  "currentPassword": "Taidz@123",
-  "newPassword": "Taidz@1"
+  "username": "phungkitai1810"
 }
+
+
+# POST http://localhost:3000/change-password
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjcxN2E4MmM1NjU1YjUzM2NjZjdlZSIsImlhdCI6MTcxODM3OTA4OX0.n7WT8JV0X28KdNkkh8KIVI-K1LO7qNqW58X5NIOzT90
+
+# {
+#   "currentPassword": "Taidz@123",
+#   "newPassword": "Taidz@1"
+# }
