@@ -39,11 +39,11 @@ const BlogPostCard = ({ content, author }) => {
 
         <div className="flex gap-4 mt-7">
           <span className="py-1 px-4">
-            {tags.map((tag, i) => (
-              <span className="tag mr-4" key={i}>
-                {tag}
+            {/* {tags.map((tag, i) => ( */}
+              <span className="tag mr-4">
+                {tags[0]}
               </span>
-            ))}
+            {/* ))} */}
           </span>
           <span className="ml-3 flex items-center gap-2 text-dark-grey">
             <i className="fi fi-rr-heart text-xl"></i>
