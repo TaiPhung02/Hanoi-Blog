@@ -13,7 +13,12 @@ const Navbar = () => {
 
   const {
     userAuth,
-    userAuth: { access_token, profile_img, new_notification_available },
+    userAuth: {
+      access_token,
+      profile_img,
+      new_notification_available,
+      isAdmin,
+    },
     setUserAuth,
   } = useContext(UserContext);
 
@@ -83,10 +88,14 @@ const Navbar = () => {
             <i className="fi fi-rr-search text-xl"></i>
           </button>
 
-          <Link to="/editor" className="hidden md:flex gap-2 link">
-            <i className="fi fi-rr-file-edit"></i>
-            <p>Write</p>
-          </Link>
+          {isAdmin ? (
+            <Link to="/editor" className="hidden md:flex gap-2 link">
+              <i className="fi fi-rr-file-edit"></i>
+              <p>Write</p>
+            </Link>
+          ) : (
+            ""
+          )}
 
           {access_token ? (
             <>

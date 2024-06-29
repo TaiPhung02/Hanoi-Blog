@@ -6,6 +6,7 @@ import PublishForm from "../components/publish-form.component";
 import { createContext } from "react";
 import Loader from "../components/loader.component";
 import axios from "axios";
+import PageNotFound from "./404.page";
 
 const blogStructure = {
   title: "",
@@ -27,7 +28,7 @@ const Editor = () => {
   const [loading, setLoading] = useState(true);
 
   let {
-    userAuth: { access_token },
+    userAuth: { access_token, isAdmin },
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -62,7 +63,9 @@ const Editor = () => {
         setTextEditor,
       }}
     >
-      {access_token === null ? (
+      {!isAdmin ? (
+        <PageNotFound />
+      ) : access_token === null ? (
         <Navigate to="/sign-in" />
       ) : loading ? (
         <Loader />
