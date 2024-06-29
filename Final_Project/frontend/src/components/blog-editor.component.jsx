@@ -25,7 +25,7 @@ const BlogEditor = () => {
     userAuth: { access_token },
   } = useContext(UserContext);
 
-  let {blog_id} = useParams();
+  let { blog_id } = useParams();
 
   let navigate = useNavigate();
 
@@ -136,7 +136,7 @@ const BlogEditor = () => {
           axios
             .post(
               import.meta.env.VITE_SERVER_DOMAIN + "/create-blog",
-              {...blogObj, id: blog_id},
+              { ...blogObj, id: blog_id },
               {
                 headers: { Authorization: `Bearer ${access_token}` },
               }
@@ -148,7 +148,7 @@ const BlogEditor = () => {
               toast.success("Saved");
 
               setTimeout(() => {
-                navigate("/");
+                navigate("/dashboard/blogs?tab=draft");
               }, 500);
             })
             .catch(({ response }) => {
