@@ -92,8 +92,6 @@ const ManageBlogs = () => {
     }
   };
 
-  // console.log("additionalParam", draft, blogs.deletedDocCount);
-
   return (
     <>
       <h1 className="max-md:hidden">Manage Blogs</h1>

@@ -168,12 +168,6 @@ const deleteBlog = (blog, access_token, target) => {
           return null;
         }
 
-        console.log({
-          ...preVal,
-          totalDocs: totalDocs - 1,
-          deletedDocCount: deletedDocCount + 1,
-        });
-
         return {
           ...preVal,
           totalDocs: totalDocs - 1,

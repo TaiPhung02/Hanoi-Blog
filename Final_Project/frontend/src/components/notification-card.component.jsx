@@ -203,7 +203,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
 
           <button
             className="underline hover:text-black ml-14 mt-2"
-            onClick={(e) => handleDelete(comment._id, "reply", e.target)}
+            onClick={(e) => handleDelete(reply._id, "reply", e.target)}
           >
             Delete
           </button>

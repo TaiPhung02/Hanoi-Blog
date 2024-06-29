@@ -1075,7 +1075,7 @@ server.post("/delete-blog", verifyJWT, (req, res) => {
           { _id: user_id },
           {
             $pull: { blog: blog._id },
-            $inc: { "account_info.total_posts": -1 },
+            $inc: { "account_info.total_posts": blog.draft ? 0 : -1 },
           }
         ).then((user) => console.log("Blog deleted"));
 

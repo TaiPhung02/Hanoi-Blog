@@ -73,7 +73,6 @@ const BlogEditor = () => {
 
   const handleTitleChange = (e) => {
     let input = e.target;
-    console.log(input.value);
 
     input.style.height = "auto";
     input.style.height = input.scrollHeight + "px";
