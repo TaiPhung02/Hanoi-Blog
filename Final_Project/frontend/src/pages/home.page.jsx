@@ -16,16 +16,19 @@ const HomePage = () => {
   let [pageState, setPageState] = useState("home");
 
   let categories = [
-    "all",
-    "trending",
-    "latest",
-    "popular",
-    "top",
-    "hot",
-    "ba đình",
-    "tây hồ",
-    "đống đa",
     "hà nội",
+    "ba đình",
+    "cầu giấy",
+    "đống đa",
+    "hai bà trưng",
+    "hoàn kiếm",
+    "thanh xuân",
+    "hoàng mai",
+    "long biên",
+    "hà đông",
+    "tây hồ",
+    "nam từ liêm",
+    "bắc từ liêm",
   ];
   const fetchLatestBlogs = ({ page = 1 }) => {
     axios

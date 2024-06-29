@@ -9,7 +9,7 @@ const SideNav = () => {
 
   let page = location.pathname.split("/")[2];
 
-  let [pageState, setPageState] = useState(page.replace("-", " "));
+  let [pageState, setPageState] = useState(page?.replace("-", " "));
   let [showSideNav, setShowsideNav] = useState(false);
 
   let activeTabLine = useRef();
@@ -73,14 +73,18 @@ const SideNav = () => {
             <h1 className="text-xl text-dark-grey mb-3">Dashboard</h1>
             <hr className="border-grey -ml-6 mb-8 mr-6" />
 
-            <NavLink
-              to="/dashboard/blogs"
-              onClick={(e) => setPageState(e.target.innerText)}
-              className="sidebar-link"
-            >
-              <i className="fi fi-rr-document"></i>
-              Blogs
-            </NavLink>
+            {isAdmin ? (
+              <NavLink
+                to="/dashboard/blogs"
+                onClick={(e) => setPageState(e.target.innerText)}
+                className="sidebar-link"
+              >
+                <i className="fi fi-rr-document"></i>
+                Blogs
+              </NavLink>
+            ) : (
+              ""
+            )}
 
             <NavLink
               to="/dashboard/notifications"
