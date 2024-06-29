@@ -35,10 +35,14 @@ const App = () => {
         <Route path="/editor/:blog_id" element={<Editor />} />
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
-          <Route path="dashboard" element={<SideNav />}>
-            <Route path="blogs" element={<ManageBlogs />} />
-            <Route path="notifications" element={<Notifications />} />
-          </Route>
+          {userAuth.isAdmin ? (
+            <Route path="dashboard" element={<SideNav />}>
+              <Route path="blogs" element={<ManageBlogs />} />
+              <Route path="notifications" element={<Notifications />} />
+            </Route>
+          ) : (
+            ""
+          )}
           <Route path="settings" element={<SideNav />}>
             <Route path="edit-profile" element={<EditProfile />} />
             <Route path="change-password" element={<ChangePassword />} />

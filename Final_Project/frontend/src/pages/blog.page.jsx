@@ -47,7 +47,6 @@ const BlogPage = () => {
     axios
       .post(import.meta.env.VITE_SERVER_DOMAIN + "/get-blog", { blog_id })
       .then(async ({ data: { blog } }) => {
-
         blog.comments = await fetchComments({
           blog_id: blog._id,
           setParentCommentCountFun: setTotalParentCommentsLoaded,
@@ -111,7 +110,11 @@ const BlogPage = () => {
           <CommentsContainer />
 
           <div className="max-w-[900px] center py-10 max-lg:px-[5vw]">
-            <img src={banner} alt="banner" className="aspect-video" />
+            <img
+              src={banner}
+              alt="banner"
+              className="aspect-video rounded-xl"
+            />
 
             <div className="mt-12">
               <h2>{title}</h2>
