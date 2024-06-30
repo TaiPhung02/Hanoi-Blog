@@ -43,6 +43,12 @@ const InPageNavigation = ({
     }
   }, [width]);
 
+  useEffect(() => {
+    if (activeTabRef.current) {
+      changePageState(activeTabRef.current, defaultActiveIndex);
+    }
+  }, [defaultActiveIndex]);
+
   return (
     <>
       <div className="relative mb-8 bg-white border-b border-grey flex flex-nowrap overflow-x-auto">

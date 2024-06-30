@@ -1087,7 +1087,65 @@ server.post("/delete-blog", verifyJWT, (req, res) => {
   } else {
     return res
       .status(500)
-      .json({ error: "You don't hve permissions to delete the blog" });
+      .json({ error: "You don't have permissions to delete the blog" });
+  }
+});
+
+server.get("/get-non-admin-users", verifyJWT, (req, res) => {
+  let query = req.query.query || "";
+  let maxLimit = parseInt(req.query.limit) || 10;
+  let page = parseInt(req.query.page) || 1;
+  let skipDocs = (page - 1) * maxLimit;
+
+  let searchCondition = {
+    admin: false,
+    $or: [
+      { "personal_info.fullname": new RegExp(query, "i") },
+      { "personal_info.username": new RegExp(query, "i") },
+      { "personal_info.email": new RegExp(query, "i") },
+    ],
+  };
+
+  User.find(searchCondition)
+    .skip(skipDocs)
+    .limit(maxLimit)
+    .then((users) => {
+      return res.status(200).json(users);
+    })
+    .catch((err) => {
+      console.log(err.message);
+      return res.status(500).json({ error: err.message });
+    });
+});
+
+server.post("/delete-user", verifyJWT, (req, res) => {
+  let isAdmin = req.admin;
+  let { user_id } = req.body;
+
+  if (isAdmin) {
+    User.findByIdAndDelete(user_id)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ error: "User not found" });
+        }
+
+        // Optionally, you can also delete associated data
+        Blog.deleteMany({ author: user._id }).then(() =>
+          console.log("Blogs deleted")
+        );
+        Comment.deleteMany({ commented_by: user._id }).then(() =>
+          console.log("Comments deleted")
+        );
+
+        return res.status(200).json({ status: "User deleted" });
+      })
+      .catch((err) => {
+        return res.status(500).json({ error: err.message });
+      });
+  } else {
+    return res
+      .status(403)
+      .json({ error: "You don't have permissions to delete the user" });
   }
 });
 

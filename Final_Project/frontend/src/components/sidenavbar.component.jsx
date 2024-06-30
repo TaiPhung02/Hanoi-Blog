@@ -86,6 +86,19 @@ const SideNav = () => {
               ""
             )}
 
+            {isAdmin ? (
+              <NavLink
+                to="/dashboard/users"
+                onClick={(e) => setPageState(e.target.innerText)}
+                className="sidebar-link"
+              >
+                <i className="fi fi-rr-user-pen"></i>
+                Users
+              </NavLink>
+            ) : (
+              ""
+            )}
+
             <NavLink
               to="/dashboard/notifications"
               onClick={(e) => setPageState(e.target.innerText)}

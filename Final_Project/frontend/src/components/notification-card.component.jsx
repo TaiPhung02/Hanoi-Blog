@@ -5,6 +5,8 @@ import NotificationCommentField from "./notification-comment-field.component";
 import { UserContext } from "../App";
 import axios from "axios";
 
+import ProfileDefault from "../imgs/profile-default.png";
+
 const NotificationCard = ({ data, index, notificationState }) => {
   let [isReplying, setReplying] = useState(false);
 
@@ -16,18 +18,26 @@ const NotificationCard = ({ data, index, notificationState }) => {
     comment,
     replied_on_comment,
     user,
-    user: {
-      personal_info: { fullname, username, profile_img },
-    },
     blog: { _id, blog_id, title },
     _id: notification_id,
   } = data;
+
+  let fullname, username, profile_img;
+
+  if (user && user.personal_info) {
+    ({ fullname, username, profile_img } = user.personal_info);
+  } else {
+    fullname = "Unknown User";
+    username = "unknown";
+    profile_img = ProfileDefault;
+  }
 
   let {
     userAuth: {
       username: author_username,
       profile_img: author_profile_img,
       access_token,
+      isAdmin,
     },
   } = useContext(UserContext);
 
@@ -57,7 +67,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
         }
       )
       .then(() => {
-        if (type == "comment") {
+        if (type === "comment" && comment) {
           results.splice(index, 1);
         } else {
           delete results[index].reply;
@@ -83,7 +93,11 @@ const NotificationCard = ({ data, index, notificationState }) => {
       }
     >
       <div className="flex gap-5 mb-3">
-        <img src={profile_img} className="w-14 h-14 flex-none rounded-full" />
+        <img
+          src={profile_img}
+          alt="Profile Image"
+          className="w-14 h-14 flex-none rounded-full"
+        />
         <div className="w-full">
           <h1 className="font-medium text-xl text-dark-grey">
             <span className="lg:inline-block hidden capitalize">
@@ -96,17 +110,21 @@ const NotificationCard = ({ data, index, notificationState }) => {
               @{username}
             </Link>
             <span className="font-normal">
-              {type == "like"
+              {type === "like"
                 ? "liked your blog"
-                : type == "comment"
+                : type === "comment"
                 ? "commented on"
                 : "replied on"}
             </span>
           </h1>
 
-          {type == "reply" ? (
+          {type === "reply" ? (
             <div className="p-4 mt-4 rounded-md bg-grey">
-              <p>{replied_on_comment.comment}</p>
+              {replied_on_comment && replied_on_comment.comment ? (
+                <p>{replied_on_comment.comment}</p>
+              ) : (
+                <p>No comment available</p>
+              )}
             </div>
           ) : (
             <Link
@@ -117,7 +135,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
         </div>
       </div>
 
-      {type !== "like" ? (
+      {type !== "like" && comment && comment.comment ? (
         <p className="ml-14 pl-5 font-gelasio text-xl my-5">
           {comment.comment}
         </p>
@@ -141,12 +159,16 @@ const NotificationCard = ({ data, index, notificationState }) => {
               ""
             )}
 
-            <button
-              className="underline hover:text-black"
-              onClick={(e) => handleDelete(comment._id, "comment", e.target)}
-            >
-              Delete
-            </button>
+            {isAdmin ? (
+              <button
+                className="underline hover:text-black"
+                onClick={(e) => handleDelete(comment._id, "comment", e.target)}
+              >
+                Delete
+              </button>
+            ) : (
+              ""
+            )}
           </>
         ) : (
           ""
@@ -159,7 +181,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
             _id={_id}
             blog_author={user}
             index={index}
-            replyingTo={comment._id}
+            replyingTo={comment && comment._id}
             setReplying={setReplying}
             notification_id={notification_id}
             notificationData={notificationState}
@@ -201,12 +223,16 @@ const NotificationCard = ({ data, index, notificationState }) => {
 
           <p className="ml-14 font-gelasio text-xl my-2">{reply.comment}</p>
 
-          <button
-            className="underline hover:text-black ml-14 mt-2"
-            onClick={(e) => handleDelete(reply._id, "reply", e.target)}
-          >
-            Delete
-          </button>
+          {isAdmin ? (
+            <button
+              className="underline hover:text-black ml-14 mt-2"
+              onClick={(e) => handleDelete(reply._id, "reply", e.target)}
+            >
+              Delete
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         ""
