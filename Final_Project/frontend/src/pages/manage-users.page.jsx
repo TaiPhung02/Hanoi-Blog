@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { Toaster } from "react-hot-toast";
 import InPageNavigation from "../components/inpage-navigation.component";
@@ -7,16 +8,16 @@ import Loader from "../components/loader.component";
 import NoDataMessage from "../components/nodata.component";
 import AnimationWrapper from "../common/page-animation";
 import LoadMoreDataBtn from "../components/load-more.component";
-import { useSearchParams } from "react-router-dom";
 import { getFullDay } from "../common/date";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState(null);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
+  let navigate = useNavigate();
 
   let {
-    userAuth: { access_token },
+    userAuth: { access_token, isAdmin },
   } = useContext(UserContext);
 
   const getUsers = (searchQuery = "", page = 1) => {
@@ -55,10 +56,15 @@ const ManageUsers = () => {
   };
 
   useEffect(() => {
+    if (!isAdmin) {
+      navigate("/page-not-found");
+      return;
+    }
+
     if (access_token && users == null) {
       getUsers(query, page);
     }
-  }, [access_token, users, query, page]);
+  }, [access_token, users, query, page, isAdmin, navigate]);
 
   const handleSearch = (e) => {
     let searchQuery = e.target.value;

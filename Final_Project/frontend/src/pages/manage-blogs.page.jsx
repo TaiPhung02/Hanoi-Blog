@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom"; // Import useNavigate
 import { UserContext } from "../App";
 import { filterPaginationData } from "../common/filter-pagination-data";
 import { Toaster } from "react-hot-toast";
@@ -12,7 +13,6 @@ import {
   ManagePublishedBlogsCard,
 } from "../components/manage-blogcard.component";
 import LoadMoreDataBtn from "../components/load-more.component";
-import { useSearchParams } from "react-router-dom";
 
 const ManageBlogs = () => {
   const [blogs, setBlogs] = useState(null);
@@ -20,9 +20,10 @@ const ManageBlogs = () => {
   const [query, setQuery] = useState("");
 
   let activeTab = useSearchParams()[0].get("tab");
+  let navigate = useNavigate(); // Use useNavigate hook
 
   let {
-    userAuth: { access_token },
+    userAuth: { access_token, isAdmin },
   } = useContext(UserContext);
 
   const getBlogs = ({ page, draft, deletedDocCount = 0 }) => {
@@ -63,6 +64,11 @@ const ManageBlogs = () => {
   };
 
   useEffect(() => {
+    if (!isAdmin) {
+      navigate("/page-not-found");
+      return;
+    }
+
     if (access_token) {
       if (blogs == null) {
         getBlogs({ page: 1, draft: false });
@@ -71,7 +77,7 @@ const ManageBlogs = () => {
         getBlogs({ page: 1, draft: true });
       }
     }
-  }, [access_token, blogs, drafts, query]);
+  }, [access_token, blogs, drafts, query, isAdmin, navigate]);
 
   const handleSearch = (e) => {
     let searchQuery = e.target.value;
@@ -112,7 +118,7 @@ const ManageBlogs = () => {
 
       <InPageNavigation
         routes={["Published Blog", "Drafts"]}
-        defaultActiveIndex={activeTab != "draft" ? 0 : 1}
+        defaultActiveIndex={activeTab !== "draft" ? 0 : 1}
       >
         {
           // published blogs
