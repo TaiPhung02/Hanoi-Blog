@@ -16,12 +16,16 @@
 <script
   src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.4/libs/oversea/index.js"></script>
 <script>
+  const bot_id = '7386679675701100545';
+  const title = 'Hướng Dẫn Viên Di Tích Lịch Sử Hà Nội';
+  const icon = 'https://upload.wikimedia.org/wikipedia/commons/1/18/Emblem_of_Hanoi.svg';
   new CozeWebSDK.WebChatClient({
     config: {
-      bot_id: '7386679675701100545',
+      bot_id,
     },
     componentProps: {
-      title: 'Coze',
+      title,
+      icon
     },
   });
 </script>
