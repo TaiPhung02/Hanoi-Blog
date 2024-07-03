@@ -23,12 +23,9 @@ const HomePage = () => {
     "hai bà trưng",
     "hoàn kiếm",
     "thanh xuân",
-    "hoàng mai",
     "long biên",
     "hà đông",
     "tây hồ",
-    "nam từ liêm",
-    "bắc từ liêm",
   ];
   const fetchLatestBlogs = ({ page = 1 }) => {
     axios
