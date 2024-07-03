@@ -25,7 +25,7 @@ const NotificationCommentField = ({
 
   const handleComment = () => {
     if (!comment.length) {
-      return toast.error("Viết gì đó để bình luận");
+      return toast.error("Write something to comment");
     }
 
     axios
@@ -48,7 +48,7 @@ const NotificationCommentField = ({
         setReplying(false);
 
         results[index].reply = { comment, _id: data._id };
-        
+
         setNotifications({ ...notifications, results });
       })
       .catch((err) => {

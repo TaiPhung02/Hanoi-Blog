@@ -56,7 +56,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
 
   const handleReplyClick = () => {
     if (!access_token) {
-      return toast.error("Hãy đăng nhập để phản hồi");
+      return toast.error("Please log in to reply");
     }
 
     setIsReplying((preVal) => !preVal);
@@ -220,20 +220,20 @@ const CommentCard = ({ index, leftVal, commentData }) => {
               className="text-dark-grey p-2 px-3 hover:bg-grey/30 rounded-md flex items-center gap-2"
               onClick={hideReplies}
             >
-              <i className="fi fi-rs-comment-dots"></i>Ẩn phản hồi
+              <i className="fi fi-rs-comment-dots"></i>Hide reply
             </button>
           ) : (
             <button
-              className="text-dark-grey p-2 px-3 hover:bg-grey/30 rounded-md flex items-center gap-2"
+              className="text-dark-grey p-2 px-3 hover:bg-grey/30 rounded-md flex items-center gap-2 whitespace-nowrap"
               onClick={loadReplies}
             >
-              <i className="fi fi-rs-comment-dots"></i>Hiển thị{" "}
-              {children.length} phản hồi
+              <i className="fi fi-rs-comment-dots"></i>
+              {children.length} reply
             </button>
           )}
 
           <button className="underline" onClick={handleReplyClick}>
-            Phản hồi
+            Reply
           </button>
 
           {username == commented_by_username || username == blog_author ? (
@@ -251,7 +251,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
         {isReplying ? (
           <div className="mt-8">
             <CommentField
-              action="gửi phản hồi"
+              action="reply"
               index={index}
               replyingTo={_id}
               setIsReplying={setIsReplying}

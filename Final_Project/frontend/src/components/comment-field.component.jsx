@@ -32,11 +32,11 @@ const CommentField = ({
 
   const handleComment = () => {
     if (!access_token) {
-      return toast.error("Bạn cần đăng nhập để nhận xét");
+      return toast.error("You must be logged in to comment");
     }
 
     if (!comment.length) {
-      return toast.error("Viết gì đó để bình luận");
+      return toast.error("Write something to comment");
     }
 
     axios
