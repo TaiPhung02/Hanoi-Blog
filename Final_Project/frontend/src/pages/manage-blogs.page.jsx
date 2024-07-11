@@ -23,8 +23,11 @@ const ManageBlogs = () => {
   let navigate = useNavigate(); // Use useNavigate hook
 
   let {
-    userAuth: { access_token, isAdmin },
+    userAuth: { access_token },
   } = useContext(UserContext);
+
+  let user = JSON.parse(sessionStorage.getItem("user"));
+  let isAdmin = user?.isAdmin;
 
   const getBlogs = ({ page, draft, deletedDocCount = 0 }) => {
     axios

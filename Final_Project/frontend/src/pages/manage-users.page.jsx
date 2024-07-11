@@ -17,8 +17,11 @@ const ManageUsers = () => {
   let navigate = useNavigate();
 
   let {
-    userAuth: { access_token, isAdmin },
+    userAuth: { access_token },
   } = useContext(UserContext);
+
+  let user = JSON.parse(sessionStorage.getItem("user"));
+  let isAdmin = user?.isAdmin;
 
   const getUsers = (searchQuery = "", page = 1) => {
     axios
