@@ -32,11 +32,11 @@ const CommentField = ({
 
   const handleComment = () => {
     if (!access_token) {
-      return toast.error("You must be logged in to comment");
+      return toast.error("Bạn phải đăng nhập để bình luận");
     }
 
     if (!comment.length) {
-      return toast.error("Write something to comment");
+      return toast.error("Viết gì đó để bình luận");
     }
 
     axios
@@ -110,7 +110,7 @@ const CommentField = ({
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="Leave a comment..."
+        placeholder="Để lại bình luận..."
         className="input-box pl-5 placeholder:text-dark-grey resize-none h-[150px] overflow-auto"
       ></textarea>
       <button className="btn-dark mt-5 px-10" onClick={handleComment}>

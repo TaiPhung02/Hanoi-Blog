@@ -111,10 +111,10 @@ const NotificationCard = ({ data, index, notificationState }) => {
             </Link>
             <span className="font-normal">
               {type === "like"
-                ? "liked your blog"
+                ? "thích nội dung của bạn"
                 : type === "comment"
-                ? "commented on"
-                : "replied on"}
+                ? "bình luận ở"
+                : "đã trả lời ở"}
             </span>
           </h1>
 
@@ -123,7 +123,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
               {replied_on_comment && replied_on_comment.comment ? (
                 <p>{replied_on_comment.comment}</p>
               ) : (
-                <p>No comment available</p>
+                <p>Không có bình luận nào có sẵn!</p>
               )}
             </div>
           ) : (
@@ -153,7 +153,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
                 className="underline hover:text-black"
                 onClick={handleReplyClick}
               >
-                Reply
+                Trả lời
               </button>
             ) : (
               ""
@@ -164,7 +164,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
                 className="underline hover:text-black"
                 onClick={(e) => handleDelete(comment._id, "comment", e.target)}
               >
-                Delete
+                Xóa
               </button>
             ) : (
               ""
@@ -228,7 +228,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
               className="underline hover:text-black ml-14 mt-2"
               onClick={(e) => handleDelete(reply._id, "reply", e.target)}
             >
-              Delete
+              Xóa
             </button>
           ) : (
             ""

@@ -91,7 +91,7 @@ const ManageUsers = () => {
 
   return (
     <>
-      <h1 className="max-md:hidden">Manage Users</h1>
+      <h1 className="max-md:hidden">Quản lý người dùng</h1>
 
       <Toaster />
 
@@ -99,7 +99,7 @@ const ManageUsers = () => {
         <input
           type="search"
           className="w-full bg-grey p-4 pl-12 pr-6 rounded-full placeholder:text-dark-grey"
-          placeholder="Search Users"
+          placeholder="Tìm kiếm người dùng"
           value={query}
           onChange={handleChange}
           onKeyDown={handleSearch}
@@ -107,7 +107,7 @@ const ManageUsers = () => {
         <i className="fi fi-rr-search absolute right-[10%] md:pointer-events-none md:left-5 top-1/2 -translate-y-1/2 text-xl text-dark-grey"></i>
       </div>
 
-      <InPageNavigation routes={["Users"]}>
+      <InPageNavigation routes={["Người dùng"]}>
         {users == null ? (
           <Loader />
         ) : users.length ? (
@@ -132,13 +132,13 @@ const ManageUsers = () => {
                         Email: {user.personal_info.email}
                       </p>
                       <p className="text-xl leading-7">
-                        Bio:{" "}
+                        Tiểu sử:{" "}
                         {user.personal_info.bio.length
                           ? user.personal_info.bio
-                          : "No bio yet"}
+                          : "Chưa có tiểu sử"}
                       </p>
                       <p className="text-xl">
-                        Joined on {getFullDay(user.joinedAt)}
+                        Tham gia vào {getFullDay(user.joinedAt)}
                       </p>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ const ManageUsers = () => {
                     className="underline text-red"
                     onClick={() => deleteUser(user._id)}
                   >
-                    Delete
+                    Xóa
                   </button>
                 </div>
               </AnimationWrapper>
@@ -155,7 +155,7 @@ const ManageUsers = () => {
             {/* <LoadMoreDataBtn state={users} fetchDataFun={getUsers} /> */}
           </>
         ) : (
-          <NoDataMessage message="No users found" />
+          <NoDataMessage message="Không tìm thấy người dùng" />
         )}
       </InPageNavigation>
     </>

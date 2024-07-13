@@ -25,7 +25,7 @@ const NotificationCommentField = ({
 
   const handleComment = () => {
     if (!comment.length) {
-      return toast.error("Write something to comment");
+      return toast.error("Viết gì đó để bình luận");
     }
 
     axios
@@ -62,11 +62,11 @@ const NotificationCommentField = ({
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="Leave a reply..."
+        placeholder="Để lại một bình luận..."
         className="input-box pl-5 placeholder:text-dark-grey resize-none h-[150px] overflow-auto"
       ></textarea>
       <button className="btn-dark mt-5 px-10" onClick={handleComment}>
-        Reply
+        Trả lời
       </button>
     </>
   );

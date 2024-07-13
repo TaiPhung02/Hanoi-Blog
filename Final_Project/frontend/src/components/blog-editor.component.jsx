@@ -37,7 +37,7 @@ const BlogEditor = () => {
           holderId: "textEditor",
           data: Array.isArray(content) ? content[0] : content,
           tools: tools,
-          placeholder: "Start typing your blog here...",
+          placeholder: "Bắt đầu nhập nội dung của bạn ở đây...",
         })
       );
     }
@@ -46,13 +46,13 @@ const BlogEditor = () => {
     let img = e.target.files[0];
 
     if (img) {
-      let loadingToast = toast.loading("Uploading...");
+      let loadingToast = toast.loading("Đang tải lên...");
 
       uploadImage(img)
         .then((url) => {
           if (url) {
             toast.dismiss(loadingToast);
-            toast.success("Uploaded");
+            toast.success("Đã tải lên");
 
             setBlog({ ...blog, banner: url });
           }
@@ -82,11 +82,11 @@ const BlogEditor = () => {
 
   const handlePublishEvent = () => {
     if (!banner.length) {
-      return toast.error("Upload a blog banner to publish it");
+      return toast.error("Tải lên banner nội dung để xuất bản");
     }
 
     if (!title.length) {
-      return toast.error("Upload a blog title to publish it");
+      return toast.error("Tải lên tiêu đề nội dung để xuất bản nó");
     }
 
     if (textEditor.isReady) {
@@ -97,7 +97,7 @@ const BlogEditor = () => {
             setBlog({ ...blog, content: data });
             setEditorState("publish");
           } else {
-            return toast.error("Write something to publish it");
+            return toast.error("Viết một cái gì đó để xuất bản nó");
           }
         })
         .catch((error) => {
@@ -112,10 +112,12 @@ const BlogEditor = () => {
     }
 
     if (!title.length) {
-      return toast.error("Write blog title before saving it as a draft");
+      return toast.error(
+        "Viết tiêu đề nội dung trước khi lưu dưới dạng bản nháp"
+      );
     }
 
-    let loadingToast = toast.loading("Saving Draft...");
+    let loadingToast = toast.loading("Lưu bản nháp...");
 
     e.target.classList.add("disable");
 
@@ -144,7 +146,7 @@ const BlogEditor = () => {
               e.target.classList.remove("disable");
 
               toast.dismiss(loadingToast);
-              toast.success("Saved");
+              toast.success("Đã lưu");
 
               setTimeout(() => {
                 navigate("/dashboard/blogs?tab=draft");
@@ -171,16 +173,16 @@ const BlogEditor = () => {
         </Link>
 
         <p className="max-md:hidden text-black line-clamp-1 w-full">
-          {title.length ? title : "New Blog"}
+          {title.length ? title : "Nội dung mới"}
         </p>
 
         <div className="flex gap-4 ml-auto">
           <button className="btn-dark py-2" onClick={handlePublishEvent}>
-            Publish
+            Xuất bản
           </button>
 
           <button className="btn-light py-2" onClick={handleSaveDraft}>
-            Save Draft
+            Lưu bản nháp
           </button>
         </div>
       </nav>
@@ -208,7 +210,7 @@ const BlogEditor = () => {
 
             <textarea
               defaultValue={title}
-              placeholder="Blog Title"
+              placeholder="Tiêu đồ nội dung"
               className="text-4xl font-medium w-full h-20 outline-none resize-none mt-10 leading-tight placeholder:opacity-40"
               onKeyDown={handleTitleKeyDown}
               onChange={handleTitleChange}

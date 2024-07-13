@@ -137,7 +137,7 @@ const BlogPage = () => {
                 </div>
 
                 <p className="text-dark-grey opacity-75 max-sm:mt-6 max-sm:ml-12 max-sm:pl-5">
-                  Published on {getDay(publishedAt)}
+                  Đã xuất bản vào {getDay(publishedAt)}
                 </p>
               </div>
             </div>
@@ -159,7 +159,7 @@ const BlogPage = () => {
             {similarBlogs !== null && similarBlogs.length ? (
               <>
                 <h1 className="text-2xl mt-14 mb-10 font-medium">
-                  Similar Blogs
+                  Các địa điểm di tích lịch sử khác của thủ đô Hà Nội
                 </h1>
 
                 {similarBlogs.map((blog, i) => {

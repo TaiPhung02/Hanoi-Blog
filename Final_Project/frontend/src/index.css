@@ -54,8 +54,12 @@
     @apply btn-dark bg-grey text-black;
   }
 
-  .input-box {
+  /* .input-box {
     @apply w-[100%] rounded-md p-4 bg-grey pl-12 border border-grey focus:bg-transparent placeholder:text-black;
+  } */
+
+  .input-box {
+    @apply w-[100%] rounded-md p-4 bg-grey pl-12 border border-grey placeholder:text-black;
   }
 
   input:disabled,

@@ -70,7 +70,7 @@ const EditProfile = () => {
     e.preventDefault();
 
     if (updatedProfileImg) {
-      let loadingToast = toast.loading("Uploading...");
+      let loadingToast = toast.loading("Đang tải lên...");
       e.target.setAttribute("disabled", true);
 
       uploadImage(updatedProfileImg)
@@ -99,7 +99,7 @@ const EditProfile = () => {
 
                 toast.dismiss(loadingToast);
                 e.target.removeAttribute("disabled");
-                toast.success("Uploaded");
+                toast.success("Đã tải lên");
               })
               .catch(({ response }) => {
                 toast.dismiss(loadingToast);
@@ -136,13 +136,13 @@ const EditProfile = () => {
     } = formData;
 
     if (username.length < 3) {
-      return toast.error("Username should be at least 3 characters");
+      return toast.error("Tên người dùng phải có ít nhất 3 ký tự");
     }
     if (bio.length > bioLimit) {
-      return toast.error(`Bio should not be more than ${bioLimit} characters`);
+      return toast.error(`Tiểu sử không được dài quá ${bioLimit} ký tự`);
     }
 
-    let loadingToast = toast.loading("Updating...");
+    let loadingToast = toast.loading("Đang cập nhật...");
     e.target.setAttribute("disabled", true);
 
     axios
@@ -175,7 +175,7 @@ const EditProfile = () => {
 
         toast.dismiss(loadingToast);
         e.target.removeAttribute("disabled");
-        toast.success("Profile Updated");
+        toast.success("Hồ sơ cá nhân đã cập nhật");
       })
       .catch(({response}) => {
         toast.dismiss(loadingToast);
@@ -191,7 +191,7 @@ const EditProfile = () => {
       ) : (
         <form ref={editProfileForm}>
           <Toaster />
-          <h1 className="max-md:hidden">Edit Profile</h1>
+          <h1 className="max-md:hidden">Chỉnh sửa hồ sơ</h1>
           <div className="flex flex-col lg:flex-row items-start py-10 gap-8 lg:gap-10">
             <div className="max-lg:center mb-5">
               <label
@@ -200,7 +200,7 @@ const EditProfile = () => {
                 className="relative block w-48 h-48 bg-grey rounded-full overflow-hidden"
               >
                 <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center text-white bg-black/30 opacity-0 hover:opacity-100 cursor-pointer">
-                  Upload Image
+                  Tải lên hình ảnh
                 </div>
                 <img
                   ref={profileImgEle}
@@ -219,7 +219,7 @@ const EditProfile = () => {
                 className="btn-light mt-5 max-lg:center lg:w-full px-10"
                 onClick={handleImageUpload}
               >
-                Upload
+                Tải lên
               </button>
             </div>
             <div className="w-full">
@@ -256,8 +256,7 @@ const EditProfile = () => {
               />
 
               <p className="text-dark-grey -mt-3">
-                Username will use to search user and will be visible to all
-                users
+              Tên người dùng sẽ được sử dụng để tìm kiếm người dùng và sẽ hiển thị cho tất cả người dùng
               </p>
 
               <textarea
@@ -270,7 +269,7 @@ const EditProfile = () => {
               ></textarea>
 
               <p className="my-6 text-dark-grey">
-                {charactersLeft} characters left
+                {charactersLeft} ký tự còn lại
               </p>
 
               <div className="md:grid md:grid-cols-2 gap-x-6">
@@ -298,7 +297,7 @@ const EditProfile = () => {
                 type="submit"
                 onClick={handleSubmit}
               >
-                Update
+                Cập nhật
               </button>
             </div>
           </div>

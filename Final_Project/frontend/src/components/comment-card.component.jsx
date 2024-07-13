@@ -56,7 +56,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
 
   const handleReplyClick = () => {
     if (!access_token) {
-      return toast.error("Please log in to reply");
+      return toast.error("Vui lòng đăng nhập để trả lời");
     }
 
     setIsReplying((preVal) => !preVal);
@@ -220,7 +220,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
               className="text-dark-grey p-2 px-3 hover:bg-grey/30 rounded-md flex items-center gap-2"
               onClick={hideReplies}
             >
-              <i className="fi fi-rs-comment-dots"></i>Hide reply
+              <i className="fi fi-rs-comment-dots"></i>Ẩn trả lời
             </button>
           ) : (
             <button
@@ -228,12 +228,12 @@ const CommentCard = ({ index, leftVal, commentData }) => {
               onClick={loadReplies}
             >
               <i className="fi fi-rs-comment-dots"></i>
-              {children.length} reply
+              {children.length} phản hồi
             </button>
           )}
 
           <button className="underline" onClick={handleReplyClick}>
-            Reply
+            Trả lời
           </button>
 
           {username == commented_by_username || username == blog_author ? (

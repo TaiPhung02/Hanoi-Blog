@@ -13,7 +13,7 @@ import LoadMoreDataBtn from "../components/load-more.component";
 const HomePage = () => {
   let [blogs, setBlog] = useState(null);
   let [trendingBlogs, setTrendingBlog] = useState(null);
-  let [pageState, setPageState] = useState("home");
+  let [pageState, setPageState] = useState("trang chủ");
 
   let categories = [
     "hà nội",
@@ -82,7 +82,7 @@ const HomePage = () => {
     setBlog(null);
 
     if (pageState == category) {
-      setPageState("home");
+      setPageState("trang chủ");
       return;
     }
 
@@ -92,7 +92,7 @@ const HomePage = () => {
   useEffect(() => {
     activeTabRef.current.click();
 
-    if (pageState == "home") {
+    if (pageState == "trang chủ") {
       fetchLatestBlogs({ page: 1 });
     } else {
       fetchBlogsByCategory({ page: 1 });
@@ -109,8 +109,8 @@ const HomePage = () => {
         {/* latest blogs */}
         <div className="w-full ">
           <InPageNavigation
-            routes={[pageState, "trending blogs"]}
-            defaultHidden={["trending blogs"]}
+            routes={[pageState, "Nội dung xu hướng"]}
+            defaultHidden={["Nội dung xu hướng"]}
           >
             <>
               {blogs == null ? (
@@ -130,12 +130,12 @@ const HomePage = () => {
                   );
                 })
               ) : (
-                <NoDataMessage message={"No blogs published!"} />
+                <NoDataMessage message={"Không có nội dung nào được xuất bản!"} />
               )}
               <LoadMoreDataBtn
                 state={blogs}
                 fetchDataFun={
-                  pageState == "home" ? fetchLatestBlogs : fetchBlogsByCategory
+                  pageState == "trang chủ" ? fetchLatestBlogs : fetchBlogsByCategory
                 }
               />
             </>
@@ -155,7 +155,7 @@ const HomePage = () => {
                   );
                 })
               ) : (
-                <NoDataMessage message={"No trending blogs!"} />
+                <NoDataMessage message={"Không có nội dung xu hướng!"} />
               )}
             </>
           </InPageNavigation>
@@ -165,7 +165,7 @@ const HomePage = () => {
         <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-8 pt-3 max-md:hidden">
           <div className="flex flex-col gap-10">
             <div>
-              <h1 className="font-medium text-xl mb-8">Post tags</h1>
+              <h1 className="font-medium text-xl mb-8">Chủ đề</h1>
 
               <div className="flex gap-3 flex-wrap">
                 {categories.map((category, i) => {
@@ -188,7 +188,7 @@ const HomePage = () => {
 
           <div>
             <h1 className="font-medium text-xl mb-8 mt-4">
-              Trending <i className="fi fi-rr-arrow-trend-up"></i>
+              Nội dung xu hướng <i className="fi fi-rr-arrow-trend-up"></i>
             </h1>
 
             {trendingBlogs == null ? (

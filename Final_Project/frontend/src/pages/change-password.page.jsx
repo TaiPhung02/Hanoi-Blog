@@ -27,7 +27,7 @@ const ChangePassword = () => {
     let { currentPassword, newPassword } = formData;
 
     if (!currentPassword.length || !newPassword.length) {
-      return toast.error("Fill all the inputs");
+      return toast.error("Điền tất cả các trường");
     }
 
     if (
@@ -35,13 +35,13 @@ const ChangePassword = () => {
       !passwordRegex.test(newPassword)
     ) {
       return toast.error(
-        "Password should be 6 to 20 characters long with a numeric, 1 lowercase and 1 upper letters"
+        "Mật khẩu phải dài từ 6 đến 20 ký tự bao gồm một số, 1 chữ thường và 1 chữ hoa"
       );
     }
 
     e.target.setAttribute("disabled", true);
 
-    let loadingToast = toast.loading("Updating...");
+    let loadingToast = toast.loading("Đang cập nhật...");
 
     axios
       .post(import.meta.env.VITE_SERVER_DOMAIN + "/change-password", formData, {
@@ -52,7 +52,7 @@ const ChangePassword = () => {
       .then(() => {
         toast.dismiss(loadingToast);
         e.target.removeAttribute("disabled");
-        return toast.success("Password changed successfully");
+        return toast.success("Mật khẩu đã được thay đổi thành công");
       })
       .catch(({ response }) => {
         toast.dismiss(loadingToast);
@@ -65,14 +65,14 @@ const ChangePassword = () => {
     <AnimationWrapper>
       <Toaster />
       <form ref={changePasswordForm} action="">
-        <h1 className="max-md:hidden">Change Password</h1>
+        <h1 className="max-md:hidden">Đổi mật khẩu</h1>
 
         <div className="py-10 w-full md:max-w-[400px]">
           <InputBox
             name="currentPassword"
             type="password"
             className="profile-edit-input"
-            placeholder="Current Password"
+            placeholder="Mật khẩu hiện tại"
             icon="fi fi-rr-unlock"
           />
 
@@ -80,7 +80,7 @@ const ChangePassword = () => {
             name="newPassword"
             type="password"
             className="profile-edit-input"
-            placeholder="New Password"
+            placeholder="Mật khẩu mới"
             icon="fi fi-rr-unlock"
           />
 
@@ -89,7 +89,7 @@ const ChangePassword = () => {
             className="btn-dark px-10"
             type="submit"
           >
-            Change Password
+            Đổi mật khẩu
           </button>
         </div>
       </form>

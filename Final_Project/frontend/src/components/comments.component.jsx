@@ -72,7 +72,7 @@ const CommentsContainer = () => {
       }
     >
       <div className="relative">
-        <h1 className="text-xl font-medium">Comments</h1>
+        <h1 className="text-xl font-medium">Bình luận</h1>
         <p className="text-lg mt-2 w-[70%] text-dark-grey line-clamp-1">
           {title}
         </p>
@@ -87,7 +87,7 @@ const CommentsContainer = () => {
 
       <hr className="border-grey my-8 w-[120%] -ml-10" />
 
-      <CommentField action="comment" />
+      <CommentField action="Bình luận" />
 
       {commentsArr && commentsArr.length ? (
         commentsArr.map((comment, i) => {
@@ -102,7 +102,7 @@ const CommentsContainer = () => {
           );
         })
       ) : (
-        <NoDataMessage message={"No comments yet!"} />
+        <NoDataMessage message={"Chưa có bình luận nào!"} />
       )}
 
       {total_parent_comments > totalParentCommentsLoaded ? (

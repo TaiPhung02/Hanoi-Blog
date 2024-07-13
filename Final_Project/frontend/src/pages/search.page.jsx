@@ -77,7 +77,7 @@ const SearchPage = () => {
             );
           })
         ) : (
-          <NoDataMessage message={"No users found"} />
+          <NoDataMessage message={"Không tìm thấy người dùng"} />
         )}
       </>
     );
@@ -87,8 +87,8 @@ const SearchPage = () => {
     <section className="h-cover flex justify-center gap-10">
       <div className="w-full">
         <InPageNavigation
-          routes={[`Search Results For - "${query}"`, "Accounts Matched"]}
-          defaultHidden={["Accounts Matched"]}
+          routes={[`Tìm kiếm kết quả cho - "${query}"`, "Tài khoản được khớp"]}
+          defaultHidden={["Tài khoản được khớp"]}
         >
           <>
             {blogs == null ? (
@@ -108,7 +108,7 @@ const SearchPage = () => {
                 );
               })
             ) : (
-              <NoDataMessage message={"No blogs published!"} />
+              <NoDataMessage message={"Không có nội dung nào được xuất bản!"} />
             )}
             <LoadMoreDataBtn state={blogs} fetchDataFun={searchBlogs} />
           </>
@@ -119,7 +119,7 @@ const SearchPage = () => {
 
       <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-1 border-grey pl-8 pt-3 max-md:hidden">
         <h1 className="font-medium text-xl mb-8">
-          User related to search <i className="fi fi-rr-user mt-1"></i>
+          Người dùng liên quan đến tìm kiếm <i className="fi fi-rr-user mt-1"></i>
         </h1>
 
         <UserCardWrapper />

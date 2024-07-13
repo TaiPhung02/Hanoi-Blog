@@ -13,9 +13,9 @@ const PageNotFound = () => {
 
       <h1 className="text-4xl font-gelasio leading-7">Page Not Found</h1>
       <p className="text-dark-grey text-xl leading-7 -mt-8">
-        The page you are looking for does not exist.{" "}
+        Trang bạn đang tìm kiếm không tồn tại.{" "}
         <Link to="/" className="text-black underline">
-          Go back
+          Quay lại
         </Link>
       </p>
 

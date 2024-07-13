@@ -24,26 +24,26 @@ const UserNavigationPanel = () => {
         {isAdmin ? (
           <Link to="/editor" className="flex gap-2 link md:hidden pl-8 py-4">
             <i className="fi fi-rr-file-edit"></i>
-            <p>Write</p>
+            <p>Viết</p>
           </Link>
         ) : (
           ""
         )}
 
         <Link to={`/user/${username}`} className="link pl-8 py-4">
-          Profile
+         Hồ sơ
         </Link>
 
         {isAdmin ? (
           <Link to="/dashboard/blogs" className="link pl-8 py-4">
-            Dashboard
+            Bảng điều khiển
           </Link>
         ) : (
           ""
         )}
 
         <Link to="/settings/edit-profile" className="link pl-8 py-4">
-          Settings
+          Cài đặt
         </Link>
 
         <span className="absolute border-t border-grey w-[100%]"></span>
@@ -52,7 +52,7 @@ const UserNavigationPanel = () => {
           className="text-left p-4 hover:bg-grey w-full pl-8 py-4"
           onClick={signOutUser}
         >
-          <h1 className="font-bold text-xl ml-1 cursor-pointer">Sign Out</h1>
+          <h1 className="font-bold text-xl ml-1 cursor-pointer">Đăng xuất</h1>
           <p className="text-dark-grey cursor-pointer">@{username}</p>
         </button>
       </div>

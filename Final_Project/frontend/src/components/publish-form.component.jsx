@@ -60,7 +60,7 @@ const PublishForm = () => {
           setBlog({ ...blog, tags: [...tags, tag] });
         }
       } else {
-        toast.error(`You can't add more than ${tagLimit} tags`);
+        toast.error(`Bạn không thể thêm nhiều hơn ${tagLimit} thẻ`);
       }
 
       e.target.value = "";
@@ -73,20 +73,20 @@ const PublishForm = () => {
     }
 
     if (!title.length) {
-      return toast.error("Write blog title before publishing");
+      return toast.error("Viết tiêu đề nội dung trước khi xuất bản");
     }
 
     if (!des.length || des.length > characterLimit) {
       return toast.error(
-        `Write a description about your blog withing ${characterLimit} characters to publish it`
+        `Viết mô tả về blog của bạn trong phạm vi ${characterLimit} ký tự để xuất bản`
       );
     }
 
     if (!tags.length) {
-      return toast.error("Add at least one tag to publish your blog");
+      return toast.error("Thêm ít nhất một thẻ để xuất bản nội dung của bạn");
     }
 
-    let loadingToast = toast.loading("Publishing...");
+    let loadingToast = toast.loading("Đang xuất bản...");
 
     e.target.classList.add("disable");
 
@@ -111,7 +111,7 @@ const PublishForm = () => {
         e.target.classList.remove("disable");
 
         toast.dismiss(loadingToast);
-        toast.success("Published");
+        toast.success("Đã xuất bản");
 
         setTimeout(() => {
           navigate("/dashboard/blogs");
@@ -138,7 +138,7 @@ const PublishForm = () => {
         </button>
 
         <div className="max-w-[550px] center">
-          <p className="text-dark-grey mb-1">Preview</p>
+          <p className="text-dark-grey mb-1">Xem trước</p>
 
           <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4">
             <img src={banner} alt="banner" />
@@ -154,17 +154,17 @@ const PublishForm = () => {
         </div>
 
         <div className="border-grey lg:border-1 lg:pl-8">
-          <p className="text-dark-grey mb-2 mt-9">Blog Title</p>
+          <p className="text-dark-grey mb-2 mt-9">Tiêu đề nội dung</p>
           <input
             type="text"
-            placeholder="Blog Title"
+            placeholder="Tiêu đề nội dung"
             defaultValue={title}
             className="input-box pl-4"
             onChange={handleBlogTitleChange}
           />
 
           <p className="text-dark-grey mb-2 mt-9">
-            Short description about your blog
+            Mô tả ngắn gọn về nội dung của bạn
           </p>
 
           <textarea
@@ -176,17 +176,17 @@ const PublishForm = () => {
           ></textarea>
 
           <p className="mt-1 text-dark-grey text-sm text-right">
-            {characterLimit - des.length} characters left
+            Còn lại {characterLimit - des.length} ký từ
           </p>
 
           <p className="text-dark-grey mb-2 mt-9">
-            Topics - (Help is searching and ranking your blog post)
+            Chủ đề
           </p>
 
           <div className="relative input-box pl-2 py-2 pb-4">
             <input
               type="text"
-              placeholder="Topic"
+              placeholder="Chủ đề"
               className="sticky input-box bg-white top-0 left-0 pl-4 mb-3 focus:bg-white"
               onKeyDown={handleKeyDown}
             />
@@ -197,11 +197,11 @@ const PublishForm = () => {
           </div>
 
           <p className="mt-1 mb-4 text-dark-grey text-sm text-right">
-            {tagLimit - tags.length} Tags left
+            Còn lại {tagLimit - tags.length} thẻ
           </p>
 
           <button className="btn-dark px-8" onClick={publishBlog}>
-            Publish
+            Xuất bản
           </button>
         </div>
       </section>

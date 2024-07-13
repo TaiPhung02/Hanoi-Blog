@@ -58,26 +58,26 @@ export const ManagePublishedBlogsCard = ({ blog }) => {
               {title}
             </Link>
 
-            <p className="line-clamp-1">Published on {getDay(publishedAt)}</p>
+            <p className="line-clamp-1">Đã xuất bản vào {getDay(publishedAt)}</p>
           </div>
 
           <div className="flex gap-6 mt-3">
             <Link to={`/editor/${blog_id}`} className="pr-4 py-2 underline">
-              Edit
+              Chỉnh sửa
             </Link>
 
             <button
               className="lg:hidden pr-4 py-2 underline"
               onClick={() => setShowStat((preVal) => !preVal)}
             >
-              Stats
+              Thông số
             </button>
 
             <button
               className="pr-4 py-2 underline text-red"
               onClick={(e) => deleteBlog(blog, access_token, e.target)}
             >
-              Delete
+              Xóa
             </button>
           </div>
         </div>
@@ -117,19 +117,19 @@ export const ManageDraftBlogPost = ({ blog }) => {
         <h1 className="blog-title mb-3">{title}</h1>
 
         <p className="line-clamp-2 font-gelasio">
-          {des.length ? des : "No description"}
+          {des.length ? des : "Không có mô tả!"}
         </p>
 
         <div className="flex gap-6 mt-3">
           <Link to={`/editor/${blog_id}`} className="pr-4 py-2 underline">
-            Edit
+            Chỉnh sửa
           </Link>
 
           <button
             className="pr-4 py-2 underline text-red"
             onClick={(e) => deleteBlog(blog, access_token, e.target)}
           >
-            Delete
+            Xóa
           </button>
         </div>
       </div>

@@ -126,8 +126,8 @@ const ProfilePage = () => {
             </p>
 
             <p>
-              {total_posts?.toLocaleString()} Blogs -{" "}
-              {total_reads?.toLocaleString()} Reads
+              {total_posts?.toLocaleString()} Bài đăng -{" "}
+              {total_reads?.toLocaleString()} Lượt đọc
             </p>
 
             <div className="flex gap-4 mt-2">
@@ -136,7 +136,7 @@ const ProfilePage = () => {
                   to="/settings/edit-profile"
                   className="btn-light rounded-md"
                 >
-                  Edit Profile
+                  Chỉnh sửa hồ sơ
                 </Link>
               ) : (
                 ""
@@ -153,8 +153,8 @@ const ProfilePage = () => {
 
           <div className="max-md:mt-12 w-full">
             <InPageNavigation
-              routes={["Blogs Published", "About"]}
-              defaultHidden={["About"]}
+              routes={["Nội dung đã xuất bản", "Thông tin"]}
+              defaultHidden={["Thông tin"]}
             >
               <>
                 {blogs == null ? (
@@ -174,7 +174,7 @@ const ProfilePage = () => {
                     );
                   })
                 ) : (
-                  <NoDataMessage message={"No blogs published!"} />
+                  <NoDataMessage message={"Không có nội dung nào được xuất bản!"} />
                 )}
                 <LoadMoreDataBtn state={blogs} fetchDataFun={getBlogs} />
               </>

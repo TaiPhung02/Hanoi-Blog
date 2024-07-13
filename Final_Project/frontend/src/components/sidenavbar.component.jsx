@@ -70,7 +70,7 @@ const SideNav = () => {
                 : "opacity-100 pointer-events-auto")
             }
           >
-            <h1 className="text-xl text-dark-grey mb-3">Dashboard</h1>
+            <h1 className="text-xl text-dark-grey mb-3">Bảng điều khiển</h1>
             <hr className="border-grey -ml-6 mb-8 mr-6" />
 
             {isAdmin ? (
@@ -80,7 +80,7 @@ const SideNav = () => {
                 className="sidebar-link"
               >
                 <i className="fi fi-rr-document"></i>
-                Blogs
+                Nội dung
               </NavLink>
             ) : (
               ""
@@ -93,7 +93,7 @@ const SideNav = () => {
                 className="sidebar-link"
               >
                 <i className="fi fi-rr-user-pen"></i>
-                Users
+                Người dùng
               </NavLink>
             ) : (
               ""
@@ -112,7 +112,7 @@ const SideNav = () => {
                   ""
                 )}
               </div>
-              Notifications
+              Thông báo
             </NavLink>
 
             {isAdmin ? (
@@ -122,13 +122,13 @@ const SideNav = () => {
                 className="sidebar-link"
               >
                 <i className="fi fi-rr-edit"></i>
-                Write
+                Viết
               </NavLink>
             ) : (
               ""
             )}
 
-            <h1 className="text-xl text-dark-grey mt-20 mb-3">Settings</h1>
+            <h1 className="text-xl text-dark-grey mt-14 mb-3">Cài đặt</h1>
             <hr className="border-grey -ml-6 mb-8 mr-6" />
 
             <NavLink
@@ -137,7 +137,7 @@ const SideNav = () => {
               className="sidebar-link"
             >
               <i className="fi fi-rr-user"></i>
-              Edit Profile
+              Chỉnh sửa hồ sơ
             </NavLink>
 
             <NavLink
@@ -146,7 +146,7 @@ const SideNav = () => {
               className="sidebar-link"
             >
               <i className="fi fi-rr-lock"></i>
-              Change Password
+              Đổi mật khẩu
             </NavLink>
           </div>
         </div>

@@ -72,7 +72,7 @@ const Navbar = () => {
         >
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Tìm kiếm"
             className="w-full md:w-auto bg-grey p-4 pl-6 pr-[12%] md:pr-6 rounded-full placeholder:text-dark-grey md:pl-12"
             onKeyDown={handleSearch}
           />
@@ -91,7 +91,7 @@ const Navbar = () => {
           {isAdmin ? (
             <Link to="/editor" className="hidden md:flex gap-2 link">
               <i className="fi fi-rr-file-edit"></i>
-              <p>Write</p>
+              <p>Viết</p>
             </Link>
           ) : (
             ""
@@ -129,11 +129,11 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/sign-in" className="btn-dark py-2">
-                Sign In
+                Đăng nhập
               </Link>
 
               <Link to="/sign-up" className="btn-light py-2 hidden md:block">
-                Sign Up
+                Đăng ký
               </Link>
             </>
           )}

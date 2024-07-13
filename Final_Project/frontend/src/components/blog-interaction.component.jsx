@@ -71,7 +71,7 @@ const BlogInteraction = () => {
           console.log(err);
         });
     } else {
-      toast.error("You must be logged in");
+      toast.error("Bạn phải đăng nhập");
     }
   };
 
@@ -113,13 +113,13 @@ const BlogInteraction = () => {
               to={`/editor/${blog_id}`}
               className="underline hover:text-dark-grey"
             >
-              Edit
+              Chỉnh sửa
             </Link>
           ) : (
             ""
           )}
 
-          <Link to={`https://fb.com/tai1810`}>
+          <Link to={`https://fb.com/`}>
             <i className="fi fi-brands-facebook text-xl hover:text-facebook"></i>
           </Link>
         </div>

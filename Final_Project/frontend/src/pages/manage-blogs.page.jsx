@@ -103,7 +103,7 @@ const ManageBlogs = () => {
 
   return (
     <>
-      <h1 className="max-md:hidden">Manage Blogs</h1>
+      <h1 className="max-md:hidden">Quản lý Nội dung</h1>
 
       <Toaster />
 
@@ -111,7 +111,7 @@ const ManageBlogs = () => {
         <input
           type="search"
           className="w-full bg-grey p-4 pl-12 pr-6 rounded-full placeholder:text-dark-grey"
-          placeholder="Search Blogs"
+          placeholder="Tìm kiếm nội dung"
           onChange={handleChange}
           onKeyDown={handleSearch}
         />
@@ -120,7 +120,7 @@ const ManageBlogs = () => {
       </div>
 
       <InPageNavigation
-        routes={["Published Blog", "Drafts"]}
+        routes={["Nội dung đã xuất bản", "Bản nháp"]}
         defaultActiveIndex={activeTab !== "draft" ? 0 : 1}
       >
         {
@@ -149,7 +149,7 @@ const ManageBlogs = () => {
               />
             </>
           ) : (
-            <NoDataMessage message="No published blogs" />
+            <NoDataMessage message="Không có nội dung nào được xuất bản!" />
           )
         }
 
@@ -179,7 +179,7 @@ const ManageBlogs = () => {
               />
             </>
           ) : (
-            <NoDataMessage message="No draft blogs" />
+            <NoDataMessage message="Không có nội dung dự thảo!" />
           )
         }
       </InPageNavigation>

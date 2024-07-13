@@ -72,7 +72,7 @@ const Notifications = () => {
 
   return (
     <div>
-      <h1 className="max-md:hidden">Recent Notifications</h1>
+      <h1 className="max-md:hidden">Thông báo gần đây</h1>
 
       <div className="my-8 flex gap-6">
         {filters.map((filterName, i) => {
@@ -107,7 +107,7 @@ const Notifications = () => {
               );
             })
           ) : (
-            <NoDataMessage message={"Nothing available"} />
+            <NoDataMessage message={"Không có gì có sẵn!"} />
           )}
 
           <LoadMoreDataBtn
