@@ -7,15 +7,16 @@ import { BlogContext } from "../pages/blog.page";
 import axios from "axios";
 
 const CommentCard = ({ index, leftVal, commentData }) => {
-  let {
-    commented_by: {
-      personal_info: { profile_img, fullname, username: commented_by_username },
-    },
-    commentedAt,
-    comment,
-    _id,
-    children,
-  } = commentData;
+  const { commented_by, commentedAt, comment, _id, children } =
+    commentData || {};
+
+  const {
+    personal_info: {
+      profile_img,
+      fullname,
+      username: commented_by_username,
+    } = {},
+  } = commented_by || {};
 
   let {
     userAuth: { access_token, username },
