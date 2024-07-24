@@ -252,7 +252,7 @@ const CommentCard = ({ index, leftVal, commentData }) => {
         {isReplying ? (
           <div className="mt-8">
             <CommentField
-              action="reply"
+              action="Phản hồi"
               index={index}
               replyingTo={_id}
               setIsReplying={setIsReplying}

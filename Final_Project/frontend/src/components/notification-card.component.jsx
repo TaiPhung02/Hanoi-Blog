@@ -18,7 +18,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
     comment,
     replied_on_comment,
     user,
-    blog: { _id, blog_id, title },
+    blog,
     _id: notification_id,
   } = data;
 
@@ -126,11 +126,15 @@ const NotificationCard = ({ data, index, notificationState }) => {
                 <p>Không có bình luận nào có sẵn!</p>
               )}
             </div>
-          ) : (
+          ) : blog && blog.blog_id ? (
             <Link
-              to={`/blog/${blog_id}`}
+              to={`/blog/${blog.blog_id}`}
               className="font-medium text-dark-grey hover:underline line-clamp-1"
-            >{`"${title}"`}</Link>
+            >{`"${blog.title}"`}</Link>
+          ) : (
+            <p className="font-medium text-dark-grey">
+              Bài viết đã có thể đã được xóa
+            </p>
           )}
         </div>
       </div>
@@ -159,7 +163,7 @@ const NotificationCard = ({ data, index, notificationState }) => {
               ""
             )}
 
-            {isAdmin ? (
+            {isAdmin && comment && comment._id ? (
               <button
                 className="underline hover:text-black"
                 onClick={(e) => handleDelete(comment._id, "comment", e.target)}
@@ -175,10 +179,10 @@ const NotificationCard = ({ data, index, notificationState }) => {
         )}
       </div>
 
-      {isReplying ? (
+      {isReplying && (
         <div className="mt-8">
           <NotificationCommentField
-            _id={_id}
+            _id={blog ? blog._id : null}
             blog_author={user}
             index={index}
             replyingTo={comment && comment._id}
@@ -187,11 +191,9 @@ const NotificationCard = ({ data, index, notificationState }) => {
             notificationData={notificationState}
           />
         </div>
-      ) : (
-        ""
       )}
 
-      {reply ? (
+      {reply && (
         <div className="ml-20 p-5 bg-grey mt-5 rounded-md">
           <div className="flex gap-3 mb-3">
             <img
@@ -223,19 +225,15 @@ const NotificationCard = ({ data, index, notificationState }) => {
 
           <p className="ml-14 font-gelasio text-xl my-2">{reply.comment}</p>
 
-          {isAdmin ? (
+          {isAdmin && reply._id && (
             <button
               className="underline hover:text-black ml-14 mt-2"
               onClick={(e) => handleDelete(reply._id, "reply", e.target)}
             >
               Xóa
             </button>
-          ) : (
-            ""
           )}
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
