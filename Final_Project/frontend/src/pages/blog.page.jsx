@@ -10,6 +10,7 @@ import BlogContent from "../components/blog-content.component";
 import CommentsContainer, {
   fetchComments,
 } from "../components/comments.component";
+import MapComponent from "../components/MapComponent";
 
 export const blogStructure = {
   title: "",
@@ -86,7 +87,7 @@ const BlogPage = () => {
     setSimilarBlogs(null);
     setLoading(true);
     setIsLikedByUser(false);
-    // setCommentsWrapper(false);
+    setCommentsWrapper(false);
     setTotalParentCommentsLoaded(0);
   };
 
@@ -153,6 +154,8 @@ const BlogPage = () => {
                 );
               })}
             </div>
+
+            <MapComponent address={blog?.des} />
 
             <BlogInteraction />
 

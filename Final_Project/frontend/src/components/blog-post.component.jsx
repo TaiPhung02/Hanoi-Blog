@@ -41,7 +41,7 @@ const BlogPostCard = ({ content, author }) => {
           <span className="py-1 px-4">
             {/* {tags.map((tag, i) => ( */}
               <span className="tag mr-4">
-                {tags[0]}
+                {tags[1] ? tags[1] : tags[0]}
               </span>
             {/* ))} */}
           </span>
