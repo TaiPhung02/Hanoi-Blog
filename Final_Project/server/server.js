@@ -7,7 +7,8 @@ import removeAccents from "remove-accents";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import admin from "firebase-admin";
-import serviceAccountKey from "./react-js-hanoi-blog-firebase-adminsdk-cvea0-bf0e86e334.json" assert { type: "json" };
+import fs from "fs";
+// import serviceAccountKey from "./react-js-hanoi-blog-firebase-adminsdk-cvea0-bf0e86e334.json" assert { type: "json" };
 import { getAuth } from "firebase-admin/auth";
 import aws from "aws-sdk";
 
@@ -19,6 +20,8 @@ import Comment from "./Schema/Comment.js";
 
 const server = express();
 let PORT = 3000;
+
+const serviceAccountKey = JSON.parse(fs.readFileSync("./react-js-hanoi-blog-firebase-adminsdk-cvea0-bf0e86e334.json", "utf8"));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
