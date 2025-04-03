@@ -20,6 +20,13 @@ const Notifications = () => {
 
   let filters = ["all", "like", "comment", "reply"];
 
+  const filterLabels = {
+    all: "Tất cả",
+    like: "Lượt thích",
+    comment: "Bình luận",
+    reply: "Phản hồi",
+  };
+
   const fetchNotifications = ({ page, deletedDocCount = 0 }) => {
     axios
       .post(
@@ -82,9 +89,8 @@ const Notifications = () => {
               className={
                 "py-2 " + (filter === filterName ? "btn-dark" : "btn-light")
               }
-              onClick={handleFilter}
-            >
-              {filterName}
+              onClick={handleFilter}>
+              {filterLabels[filterName] || filterName}
             </button>
           );
         })}

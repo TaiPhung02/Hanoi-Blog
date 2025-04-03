@@ -205,7 +205,7 @@ const HomePage = () => {
                 );
               })
             ) : (
-              <NoDataMessage message={"No trending blogs!"} />
+              <NoDataMessage message={"Không có blog nào đang thịnh hành!"} />
             )}
           </div>
         </div>

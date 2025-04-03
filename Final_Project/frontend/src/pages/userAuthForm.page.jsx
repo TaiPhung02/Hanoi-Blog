@@ -96,8 +96,10 @@ const UserAuthForm = ({ type }) => {
     <AnimationWrapper keyValue={type}>
       <section
         className="h-cover flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: "url('https://bizweb.dktcdn.net/100/366/377/files/lang-bac-ho.jpg?v=1699677034595')" }}
-      >
+        style={{
+          backgroundImage:
+            "url('https://bizweb.dktcdn.net/100/366/377/files/lang-bac-ho.jpg?v=1699677034595')",
+        }}>
         <Toaster />
         <form id="formElement" className="w-[80%] max-w-[400px]">
           <h1 className="text-4xl font-gelasio capitalize text-center mb-24">
@@ -109,7 +111,7 @@ const UserAuthForm = ({ type }) => {
               id="fullname"
               name="fullname"
               type="text"
-              placeholder="Full Name"
+              placeholder="Tên đầy đủ"
               icon="fi-rr-user"
             />
           ) : (
@@ -129,16 +131,15 @@ const UserAuthForm = ({ type }) => {
             name="password"
             type="password"
             autocomplete
-            placeholder="Password"
+            placeholder="Mật khẩu"
             icon="fi-rr-key"
           />
 
           <button
             className="btn-dark center mt-14"
             type="submit"
-            onClick={handleSubmit}
-          >
-            {type.replace("-", " ")}
+            onClick={handleSubmit}>
+            {type === "sign-in" ? "Đăng nhập" : "Đăng ký"}
           </button>
 
           <div className="relative w-full flex items-center gap-2 my-10 opacity-10 uppercase text-black font-bold">
@@ -149,10 +150,9 @@ const UserAuthForm = ({ type }) => {
 
           <button
             className="btn-dark flex items-center justify-center gap-4 w-[90%] center"
-            onClick={handleGoogleAuth}
-          >
+            onClick={handleGoogleAuth}>
             <img src={googleIcon} alt="googleIcon" className="w-5" />
-            Continue with google
+            Tiếp tục với Google
           </button>
 
           {type == "sign-in" ? (
